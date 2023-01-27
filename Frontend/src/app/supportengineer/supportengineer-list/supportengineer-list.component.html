@@ -1,0 +1,24 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2>supportengineers</h2>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>firstName</th>
+            <th>lastName</th>
+            <th>emailAddress</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let supportengineers of supportengineers| async">
+            <td>{{supportengineers.firstName}}</td>
+            <td>{{supportengineers.lastName}}</td>
+            <td>{{supportengineers.emailAddress}}</td>
+           
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

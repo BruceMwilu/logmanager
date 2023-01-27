@@ -1,0 +1,22 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2>microservices</h2>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>microServiceId</th>
+            <th>microServiceName</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let microservices of microservices| async">
+            <td>{{microservices.Id}}</td>
+            <td>{{microservices.name}}</td>
+           
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
