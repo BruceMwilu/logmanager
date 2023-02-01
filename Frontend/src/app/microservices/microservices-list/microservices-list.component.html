@@ -11,10 +11,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let microservices of microservices| async">
-            <td>{{microservices.Id}}</td>
-            <td>{{microservices.name}}</td>
-           
+          <tr *ngFor="let micros">
+            <td>{{micros.Id}}</td>
+            <td>{{micros.name}}</td>    
           </tr>
         </tbody>
       </table>

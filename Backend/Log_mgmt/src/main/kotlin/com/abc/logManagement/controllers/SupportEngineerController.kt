@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-
+@CrossOrigin("*")
 @RequestMapping("/s-e")
 class SupportEngineerController {
 
@@ -16,7 +16,7 @@ class SupportEngineerController {
 
     @Autowired
     lateinit var service:SupportEngineerServiceImpl
-    @CrossOrigin(origins = (["http://localhost:4200"]))
+
     @PostMapping("/create")
     fun createSupportEngineer(@RequestBody supportEngineer:SupportEngineerCreate):ResponseEntity<Any>{
         val engineer = service.createSupportEngineer(supportEngineer)

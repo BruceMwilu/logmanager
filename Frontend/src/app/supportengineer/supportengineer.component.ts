@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NgModule } from '@angular/core';
+import {ToastrService} from "ngx-toastr";
+import {MatDialogRef} from "@angular/material/dialog"
 import { Router } from '@angular/router';
 import { SupportengineersService } from '../services/supportengineers.service';
-import { Supportengineer } from '../supportengineer';
+import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Seng } from '../seng';
+import { Micro } from '../micro';
 
 @Component({
   selector: 'app-supportengineer',
@@ -11,33 +14,43 @@ import { Supportengineer } from '../supportengineer';
 })
 export class SupportengineerComponent implements OnInit {
 
-  supportengineer: Supportengineer = new Supportengineer();
-  submitted = false;
+  Sengform!: FormGroup;
+  seng!: Seng
+  micro!:Micro;
+  submitted = false
 
-  constructor(private sengineerService: SupportengineersService,
-    private router: Router) { }
+  constructor(private foorm: FormBuilder, private Seservice: SupportengineersService, private router: Router, private toastr: ToastrService,
+    public dialogRef: MatDialogRef<SupportengineerComponent>) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.Sengform = this.foorm.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      emailAddress: ['', Validators.required],
+      Id: ['', Validators.required]
+    });
   }
+ 
+  submit() {
 
-  newSupportengineer(): void {
-    this.submitted = false;
-    this.supportengineer = new Supportengineer;
+    const seng: Seng= {
+      firstName: this.Sengform.value['firstName'],
+      lastName: this.Sengform.value['lastName'],
+      emailAddress: this.Sengform.value['emailAddress'],
+      Id: this.micro
+    }
+ 
+    this.Seservice.createEngineer(seng).subscribe(
+      response => {
+
+        if (response.status == 201){
+          this.toastr.success("Success!")
+          this.dialogRef.close();
+        }
+        },
+      error => {
+      this.toastr.error("SupportEngineer  could not be created please try again")
+      }
+      );
   }
-
-  save() {
-    this.sengineerService.createEngineer(this.supportengineer)
-      .subscribe(data => console.log(data), error => console.log(error));
-    this.supportengineer = new Supportengineer;
-    //this.gotoList();
-  }
-
-  onSubmit() {
-    this.submitted = true;
-    this.save();    
-  }
-
- // gotoList() {
-  //  this.router.navigate(['/employees']);
- // }
 }

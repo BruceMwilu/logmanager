@@ -1,7 +1,33 @@
-<h1>Dashboard</h1>
-<div class="card">
-    <div class="card-head">Logs - dashboard</div>
-    <div class="card-body">
-       lOGS MANAGAEMENTS WORKS HERE
-    </div>
+<div>
+    <app-widget-area [data]="bigChart"></app-widget-area>
 </div>
+
+<br>
+
+<mat-divider></mat-divider>
+
+<br>
+
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-cards">
+    <mat-card fxFlex="25">
+        <app-widget-card label="INFO" total="50" percentage="14" [data]="cards"></app-widget-card>
+    </mat-card>
+    <mat-card fxFlex="25">
+        <app-widget-card label="DEBUG" total="10" percentage="21" [data]="cards"></app-widget-card>
+    </mat-card>
+    <mat-card fxFlex="25">
+        <app-widget-card label="ERROR" total="8" percentage="34" [data]="cards"></app-widget-card>
+    </mat-card>
+    <mat-card fxFlex="25">
+        <app-widget-card label="FATAL" total="6" percentage="19" [data]="cards"></app-widget-card>
+    </mat-card>
+</div>
+
+<br>
+
+<mat-divider></mat-divider>
+
+<br>
+<br>
+<br>
+

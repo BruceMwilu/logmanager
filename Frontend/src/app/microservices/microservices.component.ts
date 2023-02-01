@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Microservices } from '../microservices';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
 import { MicroservicesService } from '../services/microservices.service';
+import { Micro } from '../micro';
 
 
 @Component({
@@ -11,34 +13,37 @@ import { MicroservicesService } from '../services/microservices.service';
 })
 export class MicroservicesComponent implements OnInit {
 
-  microservices: Microservices = new Microservices();
-  submitted = false;
+  Microform!: FormGroup;
+  submitted = false
 
-  constructor(private microService: MicroservicesService,
-    private router: Router) { }
 
-  ngOnInit() {
+  constructor(private fb: FormBuilder, private dataService: MicroservicesService, private router: Router, private toastr: ToastrService
+    ) {}
+
+  ngOnInit(): void {
+    this.Microform = this.fb.group({
+      name: ['', Validators.required] 
+    });
   }
+  
 
-  newMicroservice(): void {
-    this.submitted = false;
-    this.microservices = new Microservices;
+  submit() {
+
+    const micro: Micro= {
+      name: this.Microform.value['name'],
+      }
+      
+ 
+    this.dataService.createMicroserv(micro).subscribe(
+      response => {
+        if (response.status == 200){
+          this.toastr.success("Success!")
+
+        }
+        }
+      );
   }
-
-  save() {
-    this.microService.createMicroserv(this.microservices)
-      .subscribe(data => console.log(data), error => console.log(error));
-    this.microservices = new Microservices;
-   // this.gotoList();
-  }
-
-  onSubmit() {
-    this.submitted = true;
-    this.save();    
-  }
-
- // gotoList() {
- ///   this.router.navigate(['/employees']);
- // }
-
+   
 }
+
+

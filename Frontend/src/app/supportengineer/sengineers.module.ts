@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SengineersRoutingModule } from './sengineers-routing.module';
 import { SupportengineerComponent } from './supportengineer.component';
 import { SupportengineerListComponent } from './supportengineer-list/supportengineer-list.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -16,7 +16,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     SengineersRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
     
   ]
 })

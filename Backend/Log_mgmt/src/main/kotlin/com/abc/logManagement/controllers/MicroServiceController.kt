@@ -7,13 +7,12 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-
+@CrossOrigin("*")
 @RequestMapping("/micro-services")
 class MicroServiceController {
 
     @Autowired
     lateinit var service:MicroServiceServiceImpl
-    @CrossOrigin(origins = (["http://localhost:4200"]))
 
     @PostMapping("/create")
     fun createMicroService(@RequestParam(name = "name") microService: CreateMicroService):ResponseEntity<Any>{

@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {  MatPaginator } from '@angular/material/paginator';
+import { DashboardService } from './dashboard.service';
+
+
+
+
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +13,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  
+  bigChart: any[] = [];
+  cards: any[] = [];
+  
 
-  ngOnInit(): void {
+
+  @ViewChild(MatPaginator, { static: true })
+  paginator!: MatPaginator;
+
+  constructor(private dashboardService: DashboardService) { }
+
+  ngOnInit() {
+    this.bigChart = this.dashboardService.bigChart();
+    this.cards = this.dashboardService.cards();
+
   }
+
 
 }

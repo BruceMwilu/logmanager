@@ -6,17 +6,18 @@
       <table class="table table-striped">
         <thead>
           <tr>
+            <th>id</th>
             <th>firstName</th>
             <th>lastName</th>
             <th>emailAddress</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let supportengineers of supportengineers| async">
-            <td>{{supportengineers.firstName}}</td>
-            <td>{{supportengineers.lastName}}</td>
-            <td>{{supportengineers.emailAddress}}</td>
-           
+          <tr *ngFor="let seng">
+            <td>{{seng.id}}</td>
+            <td>{{seng.firstName}}</td>
+            <td>{{seng.lastName}}</td>
+            <td>{{seng.emailAddress}}</td>
           </tr>
         </tbody>
       </table>
